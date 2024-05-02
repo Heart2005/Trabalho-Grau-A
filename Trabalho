@@ -1,0 +1,301 @@
+import random
+
+# Variáveis para o jogador 1
+posicao_jogador1 = 0
+num_filhos_jogador1 = 0
+casado_jogador1 = False
+divorciado_jogador1 = False
+formado_jogador1 = False
+famoso_jogador1 = False
+vivo_jogador1 = True
+dinheiro_jogador1 = 0
+
+# Variáveis para o jogador 2 (se houver)
+# Vamos considerar que, se não houver um segundo jogador, essas variáveis não serão utilizadas
+posicao_jogador2 = 0
+num_filhos_jogador2 = 0
+casado_jogador2 = False
+divorciado_jogador2 = False
+formado_jogador2 = False
+famoso_jogador2 = False
+vivo_jogador2 = True
+dinheiro_jogador2 = 0
+
+def girar_roleta():
+    # Simula o lançamento de um dado de 6 lados
+    resultado = random.randint(1, 6)
+    return resultado
+
+def Dado(nJogador):
+    # Girar a roleta
+    resultado = girar_roleta()
+    
+    if resultado == 1:
+        print(f"Jogador {nJogador} avançou 1 casa.")
+        return 1
+    elif resultado == 3:
+        print(f"Jogador {nJogador} retrocedeu 1 casa.")
+        return -1
+    elif resultado == 6:
+        print(f"Jogador {nJogador} perdeu uma rodada no jogo em dupla.")
+        return 0
+    else:
+        print(f"Jogador {nJogador} não avançou nem retrocedeu.")
+        return 0
+    
+def Caveira(nJogador):
+    print(f"Jogador {nJogador} morreu!")
+    return -21  # Retorna -21 para indicar que o jogador está fora do tabuleiro
+
+def Morrer(nJogador):
+    print(f"Jogador {nJogador} morreu!")
+    # Aqui você pode adicionar qualquer lógica adicional relacionada à morte do jogador, se necessário.
+
+
+def DesafioMatematico(nJogador):
+    print("Desafio matemático!!! Escolha uma opção:")
+    print("1. Mostrar na tela os números primos até 100")
+    print("2. Fazer o somatório dos números de 1 até 100")
+    print("3. Imprimir a série de Fibonacci até o décimo elemento")
+    print("4. Calcular a área de um círculo com raio 2.5")
+    print("5. Imprimir o fatorial de 5")
+    print("6. Imprimir os 5 primeiros números divisíveis por 2 e por 5")
+    
+    opcao = int(input("Escolha uma opção (1-6): "))
+    
+    if opcao == 1:
+        print("Números primos até 100:")
+        primos = [2]
+        for i in range(3, 101):
+            eh_primo = True
+            for j in range(2, i):
+                if i % j == 0:
+                    eh_primo = False
+                    break
+            if eh_primo:
+                primos.append(i)
+        print(primos)
+    elif opcao == 2:
+        print("Somatório dos números de 1 até 100:", sum(range(1, 101)))
+    elif opcao == 3:
+        print("Série de Fibonacci até o décimo elemento:")
+        a, b = 0, 1
+        fibonacci = [a, b]
+        for _ in range(8):
+            a, b = b, a + b
+            fibonacci.append(b)
+        print(fibonacci)
+    elif opcao == 4:
+        print("Área de um círculo com raio 2.5:", 3.14 * (2.5 ** 2))
+    elif opcao == 5:
+        print("Fatorial de 5:", 5 * 4 * 3 * 2 * 1)
+    elif opcao == 6:
+        print("5 primeiros números divisíveis por 2 e por 5:", [i for i in range(1, 26) if i % 2 == 0 and i % 5 == 0])
+
+def Formatura(nJogador):
+    print("Se formou!! Escolha um curso para os 6 possíveis valores:")
+    print("1 - Direito")
+    print("2 - Medicina")
+    print("3 - Jogos Digitais")
+    print("4 - Segurança da informação")
+    print("5 - Policial")
+    print("6 - Pintor")
+    
+    opcao = int(input("Escolha um curso (1-6): "))
+    
+    if opcao == 1:
+        print("Você se formou em Direito!")
+    elif opcao == 2:
+        print("Você se formou em Medicina!")
+    elif opcao == 3:
+        print("Você se formou em Jogos Digitais!")
+    elif opcao == 4:
+        print("Você se formou em Segurança da informação!")
+    elif opcao == 5:
+        print("Você se formou em Policial!")
+    elif opcao == 6:
+        print("Você se formou em Pintor!")
+
+def TerFilho(nJogador):
+    print("Teve filho!!!")
+    print("Jogue o dado e se sair o número 5, são gêmeos!!! Nos outros casos, apenas 1 filho.")
+    
+    numero_dado = random.randint(1, 6)
+    if numero_dado == 5:
+        print("Parabéns, são gêmeos!")
+    else:
+        print("Parabéns, nasceu um bebê!")
+
+def Casar(nJogador):
+    print("Casou-se!")
+    print("Atualize o status de relacionamento do seu jogador.")
+    status_relacionamento = input("Digite o novo status de relacionamento (ex: casado, solteiro): ")
+    print("Status de relacionamento atualizado:", status_relacionamento)
+
+def FicarFamoso(nJogador):
+    print("Ficou famoso!")
+    print("Atualize o status de fama do seu jogador.")
+    status_fama = input("Digite o novo status de fama (ex: famoso, não famoso): ")
+    print("Status de fama atualizado:", status_fama)
+
+def Divorciar(nJogador):
+    print("Divórcio!!!")
+    print("Atualize o status de relacionamento do seu jogador.")
+    status_relacionamento = input("Digite o novo status de relacionamento (ex: casado, solteiro): ")
+    print("Status de relacionamento atualizado:", status_relacionamento)
+
+def Loteria(nJogador):
+    print("Ganhou na loteria!!!!")
+    print("Atualize o status relacionado a ganhar na loteria de acordo com o número que tirar na roleta:")
+    print("1 - Ganha R$ 2,50 no bolão")
+    print("2 - Ganha R$ 5.000,00")
+    print("3 - Ganha R$ 50.000,00")
+    print("4 - Ganha R$ 500.000,00")
+    print("5 - Ganha R$ 5.000.000,00")
+    print("6 - Ganha R$ 100.000.000,00")
+    
+    premio = random.randint(1, 6)
+    if premio == 1:
+        print("Você ganhou R$ 2,50 no bolão!")
+    elif premio == 2:
+        print("Você ganhou R$ 5.000,00!")
+    elif premio == 3:
+        print("Você ganhou R$ 50.000,00!")
+    elif premio == 4:
+        print("Você ganhou R$ 500.000,00!")
+    elif premio == 5:
+        print("Você ganhou R$ 5.000.000,00!")
+    elif premio == 6:
+        print("Você ganhou R$ 100.000.000,00!")
+
+def NovoAmor(nJogador):
+    print("Novo amor?")
+    if jogador1Casado or jogador2Casado:
+        print("Você já foi casado antes. Não pode ter um novo amor.")
+    else:
+        print("Se você está solteiro (nunca casou ou divorciou-se), mais uma chance!")
+
+def NovoAmor(nJogador):
+    global jogador1Casado, jogador2Casado  # Importante para acessar as variáveis globais
+    print("Novo amor?")
+    if jogador1Casado or jogador2Casado:
+        print("Você já foi casado antes. Não pode ter um novo amor.")
+    else:
+        print("Se você está solteiro (nunca casou ou divorciou-se), mais uma chance!")
+
+# Define variáveis globais
+jogador1Casado = False
+jogador2Casado = False
+
+def ExecutaRegras(nJogador, nCasa):
+    if nCasa == 0:
+        print("Iniciou a Jornada!")
+    elif nCasa == 1:
+        print("Casa 1 - Dado")
+        Dado(nJogador)
+    elif nCasa == 2:
+        print("Casa 2 - Caveira")
+        Morrer(nJogador)
+    elif nCasa == 3:
+        print("Casa 3 - Calculadora")
+        DesafioMatematico(nJogador)
+    elif nCasa == 4:
+        print("Casa 4 - Pessoa se formando")
+        Formatura(nJogador)
+    elif nCasa == 5:
+        print("Casa 5 - Bebê")
+        TerFilho(nJogador)
+    elif nCasa == 6:
+        print("Casa 6 - Mulher e homem se casando")
+        Casar(nJogador)
+    elif nCasa == 7:
+        print("Casa 7 - Homem dançando")
+        FicarFamoso(nJogador)
+    elif nCasa == 8:
+        print("Casa 8 - Coração partido")
+        Divorciar(nJogador)
+    elif nCasa == 9:
+        print("Casa 9 - Saco de dinheiro")
+        Loteria(nJogador)
+    elif nCasa == 10:
+        print("Casa 10 - Coração consertado")
+        NovoAmor(nJogador)
+    elif nCasa == 11:
+        print("Casa 11 - Ampulheta")
+        Resetar(nJogador)
+    else:
+        print("Casa", nCasa)
+
+import random
+
+def Dado(nJogador):
+    print("Rode a roleta:")
+    resultado = random.randint(1, 6)
+    print("Resultado da roleta:", resultado)
+    
+    if resultado == 1:
+        print("Avance 1 casa!")
+    elif resultado == 3:
+        print("Volte 1 casa!")
+    elif resultado == 6:
+        print("Perde uma rodada no jogo em dupla!")
+        # Implemente aqui a lógica para perder uma rodada no jogo em dupla
+    else:
+        print("Nada aconteceu.")
+
+def Resetar(nJogador):
+    print("Máquina do tempo: volta para o inicio!!...")
+    print("Perde todos os achievements, cônjuge e filhos.")
+    
+    # Reinicialize todas as variáveis relacionadas aos achievements, cônjuge e filhos do jogador
+
+def jogo_da_vida():
+    # Inicialize as variáveis dos jogadores
+    posJogador1 = 0
+    posJogador2 = 0
+    filhosJogador1 = 0
+    filhosJogador2 = 0
+    dinheiroJogador1 = 0
+    dinheiroJogador2 = 0
+    jogador1Casado = False
+    jogador2Casado = False
+    jogador1Famoso = False
+    jogador2Famoso = False
+    jogador1Vivo = True
+    jogador2Vivo = True
+    
+    # Define a quantidade de jogadores
+    num_jogadores = int(input("Informe a quantidade de jogadores (1 ou 2): "))
+    
+    # Loop principal do jogo
+    while True:
+        # Jogador 1
+        print("\nJogador 1 - Sua vez:")
+        print("Posição atual:", posJogador1)
+        casa_atual = posJogador1
+        ExecutaRegras(1, casa_atual)
+        posJogador1 += 1  # Avança 1 casa
+        
+        # Verifica se o jogador 1 chegou à casa final
+        if posJogador1 >= 21:
+            print("Jogador 1 alcançou a casa final! Teve uma vida longa e próspera!")
+            break  # Encerra o jogo
+        
+        # Verifica se há dois jogadores e se o jogador 1 ainda está vivo
+        if num_jogadores == 2 and jogador1Vivo:
+            # Jogador 2
+            print("\nJogador 2 - Sua vez:")
+            print("Posição atual:", posJogador2)
+            casa_atual = posJogador2
+            ExecutaRegras(2, casa_atual)
+            posJogador2 += 1  # Avança 1 casa
+            
+            # Verifica se o jogador 2 chegou à casa final
+            if posJogador2 >= 21:
+                print("Jogador 2 alcançou a casa final! Teve uma vida longa e próspera!")
+                break  # Encerra o jogo
+
+jogo_da_vida()
+
+
+
